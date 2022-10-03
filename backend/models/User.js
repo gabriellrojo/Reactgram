@@ -1,12 +1,12 @@
-const mongoose = require("mongoose")
+const mongoose = require("../db/conn")
 const { Schema } = mongoose
 
 const User = mongoose.model("User", new Schema ({
-    name: { type: String, required: true },
-    email: { email: String, required: true },
-    password: { password: String, required: true },
+    name: { type: String },
+    email: { type: String },
+    password: { type: String },
     image: { type: String },
-    bio: { type: String, required: true },
+    bio: { type: String },
 
 }, {
     timestamps: true

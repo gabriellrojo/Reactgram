@@ -1,6 +1,6 @@
 const { body } = require("express-validator")
 
-const userValidation = () => {
+const createUserValidation = () => {
     return [
         body("name")
             .isString()
@@ -29,4 +29,20 @@ const userValidation = () => {
         ]
 }
 
-module.exports = userValidation
+const loginUserValidation = () => {
+    return [
+        body("email")
+            .isString()
+            .withMessage("O campo email é obrigatório")
+            .isEmail()
+            .withMessage("Email inválido"),
+        body("password")
+            .isString()
+            .withMessage("O campo da senha é obrigatório")
+    ]
+}
+
+module.exports = {
+    createUserValidation,
+    loginUserValidation,
+}

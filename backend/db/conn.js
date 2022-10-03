@@ -1,17 +1,13 @@
 const mongoose = require("mongoose")
-const passwordDb = process.env.USER_DB
-const userDb = process.env.PSS_db
+require("dotenv").config()
+const mongoLink = process.env.MONGO_LINK
 
-const conn = async () => {
-    
-    try{
-        const conn_db = await mongoose.connect(`mongodb+srv://${userDb}:${passwordDb}@cluster0.dxqpi8a.mongodb.net/?retryWrites=true&w=majority`)
-        console.log("Estou connectado ao MongoDbAtlas via Mongoose")
+mongoose.connect(mongoLink)
+    .then(() => console.log("Estou connectado ao MongoDB Atlas via Mongoose"))
+    .catch((err) => console.log(`Ocorreu um erro: ${err}`))
 
-    } catch(err) {
-        console.log(err)
-    }
-}
+module.exports = mongoose
 
-conn()
+
+       
 
