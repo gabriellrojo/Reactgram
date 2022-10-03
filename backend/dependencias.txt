@@ -1,0 +1,19 @@
+1- dotenv: responsável por permitir a criação de variáveis de ambiente;
+
+2- cors: como estaremos trabalhando a parte de front e de back ambas no localhost; utilizaremos o cors para que as requisições ocorram normalmente;
+
+3- express: responsável por criar o nosso servidos;
+
+4- express-validator: middleware utiilizado para realizar validações. Utilizando essa dependência como middleware, não é necessário criar tais validações na mão enquanto construímos o backend obedecendo a arquitetura MVC;
+
+5- mongoose: abstração do MongoDB. Trabalharemos nesse projeto com o banco de dados não relacional. A partir da dependência Mongoose, temos essa abstração em funcão da ODM
+
+6- bcryptjs: dependência responsável pela geração de senha com hash e salt
+
+7- jsonwebtoken: responsável pela geração do token no backend, essencial para o processo de validação do usuário
+
+8- multer: middleware responsável pelo upload de imagens
+
+-- Dependências de Desenvolvimento --
+
+1- Nodemon: atualização automática do nosso backend. Sem essa dependência, deveremos executar o projeto a todo momento para conferir as atualizações
