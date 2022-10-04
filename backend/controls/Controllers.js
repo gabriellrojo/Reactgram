@@ -220,7 +220,7 @@ module.exports = class Controller {
             photo.title = title
         }
 
-        const updatedPhoto = await photo.save()
+        const updatedPhoto = await Photo.findByIdAndUpdate({_id: id}, {$set: photo}, {new: true})
 
         res.status(201).json({"foto atualizada com sucesso": updatedPhoto})
     }
