@@ -106,7 +106,7 @@ module.exports = class Controller {
             user.bio = bio
         }
 
-        const updatedUser = await User.findByIdAndUpdate({_id: user.id})
+        const updatedUser = await User.findByIdAndUpdate({_id: user.id}, {$set: user}, {new: true})
         res.status(201).json(updatedUser)
     }
 
@@ -220,8 +220,69 @@ module.exports = class Controller {
             photo.title = title
         }
 
-        const updatedPhoto = await Photo.findByIdAndUpdate({_id: id}, {$set: photo}, {new: true})
+        const updatedPhoto = await Photo.findByIdAndUpdate({_id: id}, {$set: photo}, {new: true}) // podemos atualizado também utilizando: photo.save()
 
         res.status(201).json({"foto atualizada com sucesso": updatedPhoto})
+    }
+
+    static likeOnPhotos = async (req, res) => {
+        const user = req.user
+        const userId = user._id
+        const id = req.params.id
+
+        const photo = await Photo.findOne({_id: id})
+
+        if(!photo){
+            res.status(422).json({erros: ["A foto não foi encontrada"]})
+        }
+
+        if(photo.likes.includes(userId)){
+            res.status(422).json({erros: ["Você já curtiu essa foto"]})
+            return
+        }
+
+        photo.likes.push(userId)
+
+        const updatedLikes = await Photo.findByIdAndUpdate({_id: id}, {$set: photo}, {new: true})
+
+        res.status(201).json(updatedLikes)
+    }
+
+    static commentsOnPhotos = async (req, res) => {
+        const id = req.params.id
+        const user = req.user
+        const comment = req.body.comment
+        const userId = user._id
+        const name = user.name
+        const image = user.image
+
+        const objComment = {
+            comment: comment,
+            id: userId,
+            name: name,
+            image: image
+            
+        }
+
+        const photo = await Photo.findById({_id: id})
+
+        if(!photo){
+            res.status(422).json({erros: ["Nenhuma foto foi encontrada"]})
+            return
+        }
+        
+        photo.comments.push(objComment)
+
+        const updateWithComment = await Photo.findByIdAndUpdate({_id: id}, {$set: photo}, {new: true})
+
+        res.status(201).json({"comentário adicionado com sucesso": updateWithComment})
+    }
+
+    static searchPhoto = async (req, res) => {
+        const q = req.query.q
+        
+        const photo = await Photo.find({title: new RegExp(q, "i")})
+        
+        res.status(200).json(photo)
     }
 }
