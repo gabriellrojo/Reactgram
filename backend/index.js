@@ -2,7 +2,8 @@ const express = require("express")
 require("dotenv").config()
 const cors = require("cors")
 const path = require("path")
-const routes = require("./routes/routes")
+const userRoutes = require("./routes/userRoutes")
+const photoRoutes = require("./routes/photosRoutes")
 
 const server = express()
 
@@ -15,7 +16,9 @@ server.use(cors({
     origin: "http//localhost:3000"
 }))
 server.use("/uploads", express.static(path.join(__dirname, "/uploads")))
-server.use(routes)
+
+server.use("/user", userRoutes)
+server.use("/photo", photoRoutes)
 
 
 const port = process.env.PORT

@@ -1,8 +1,12 @@
 const User = require("../models/User")
+const Photo = require("../models/Photo")
 const bcrypt = require("bcryptjs")
 const createToken = require("../helpers/createToken")
 
 module.exports = class Controller {
+    
+    //Controller para os usuários
+    
     static home = (req, res) => {
         res.send("Hello Word")
     }
@@ -71,5 +75,77 @@ module.exports = class Controller {
     static profile = (req, res) => {
         const user = req.user
         res.send(user)
+    }
+
+    static updateProfile = async (req, res) => {
+        const name = req.body.name
+        const password = req.body.password
+        const bio = req.body.bio
+        let image = null
+
+        if(req.file){
+           image = req.file.filename
+        }
+
+        const user = req.user
+        
+        if(name){
+            user.name = name
+        }
+        if(password){
+            const salt = await bcrypt.genSalt(12)
+            const hashedPassword = await bcrypt.hash(password, salt)
+            user.password = hashedPassword
+        }
+
+        if(image){
+            user.image = image
+        }
+
+        if(bio){
+            user.bio = bio
+        }
+
+        const updatedUser = await User.findByIdAndUpdate({_id: user.id})
+        res.status(201).json(updatedUser)
+    }
+
+    static getUserById = async (req, res) => {
+        const id = req.params.id
+
+        const user = await User.findById({_id: id})
+
+        if(!user){
+            res.status(404).json({erros: ["Usuário não encontrado"]})
+            return
+        }
+
+        res.status(200).json(user)
+    }
+
+    //Controller para as imagens
+
+    static uploadPhoto = async (req, res) => {
+        const title = req.body.title
+        const image = req.file.filename
+        console.log(image)
+
+        const user = req.user
+
+        const newPhoto = new Photo({
+            image: image,
+            title: title,
+            userId: user._id,
+            userName: user.name
+        })
+
+        const uploadNewPhoto = await newPhoto.save()
+
+        if(!uploadNewPhoto){
+            res.status(422).json({erros: ["Ocorreu um problema ao realizar o upload do arquivo"]})
+            return
+        }
+
+        res.status(201).json(uploadNewPhoto)
     }
 }
