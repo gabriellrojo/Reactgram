@@ -5,6 +5,7 @@ const validation = require("../middlewares/handleValidation")
 const { createUserValidation, loginUserValidation, userUpdate } = require("../middlewares/userValidation")
 const auth = require("../middlewares/auth")
 const { imageUpload } = require("../middlewares/uploadStorageImage")
+const { Router } = require("express")
 
 routeUser.get("/", Controllers.home)
 routeUser.post("/register", createUserValidation(), validation, Controllers.registerUser)

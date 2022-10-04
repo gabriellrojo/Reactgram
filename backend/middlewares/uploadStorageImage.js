@@ -13,7 +13,7 @@ const imageStorage = multer.diskStorage({
             folder = "photos"
         }
 
-        callback(null, `uploads/${folder}`)
+        callback(null, `uploads/${folder}/`)
     },
     filename: (req, file, callback) => {
         callback(null, Date.now() + path.extname(file.originalname))

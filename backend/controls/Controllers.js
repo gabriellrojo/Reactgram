@@ -128,8 +128,7 @@ module.exports = class Controller {
     static uploadPhoto = async (req, res) => {
         const title = req.body.title
         const image = req.file.filename
-        console.log(image)
-
+    
         const user = req.user
 
         const newPhoto = new Photo({
@@ -147,5 +146,82 @@ module.exports = class Controller {
         }
 
         res.status(201).json(uploadNewPhoto)
+    }
+
+    static deletePhoto = async(req, res) => {
+        const id = req.params.id
+        const photo = await Photo.findOne({_id: id})
+        const user = req.user
+        const userId = toString(user._id)
+        const photoUserId = toString(photo.userId)
+        if(!photo){
+            res.status(404).json({erros: ["Imagem não encontrada"]})
+            return
+        }
+        if(userId !== photoUserId){
+            res.status(422).json({erros: ["A exclusão da imagem só pode ser feita por quem realizou o upload"]})
+            return
+        }
+        try {
+            await Photo.findByIdAndDelete({_id: id})
+            res.status(201).json({idPhoto: id, msg: "Imagem excluida com sucesso"})
+        }
+        catch{
+            res.status(404).json({erros: ["Ocorreu um erro. Tente novamente mais tarde"]})
+        }
+    }
+
+    static getAllPhotos = async (req, res) => {
+        try {
+            const photos = await Photo.find().sort([["createAt", -1]]).exec()
+            res.status(200).json(photos)
+        } catch {
+            res.status(404).json({erros: ["Ocorreu um erro. Tente novamente"]})
+        }
+        
+    }
+
+    static getUserPhotos = async (req, res) => {
+        const id = req.params.id
+
+        try {
+            const userPhotos = await Photo.find({userId: id})
+            res.status(200).json(userPhotos).sort([["createdAt, -1"]]).exec()
+        }
+        catch {
+            res.status(404).json({erros: ["Ocorreu um erro. Tente novamente"]})
+        }      
+    }
+
+    static getPhotoById = async (req, res) => {
+        const id = req.params.id
+
+        const getPhoto = await Photo.findById({_id: id})
+        if(!getPhoto){
+            res.status(404).json({erros: ["Fotos não encontrada"]})
+        }
+        
+        res.status(201).json(getPhoto)
+    }
+
+    static updatePhoto = async (req, res) => {
+        const id = req.params.id
+        const title = req.body.title
+        const photo = await Photo.findById({_id: id})
+        const user = req.user
+        const userId = toString(user._id)
+        const photoUserId = toString(photo.userId)
+        if(userId !== photoUserId){
+            res.status(422).json({erros: ["Operação não permitida"]})
+            return
+        }
+
+        if(title){
+            photo.title = title
+        }
+
+        const updatedPhoto = await photo.save()
+
+        res.status(201).json({"foto atualizada com sucesso": updatedPhoto})
     }
 }
