@@ -1,10 +1,24 @@
-import './App.css';
+import "./App.css"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Home from "./pages/home/Home";
+import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="App">
-      <h1>ReactGram</h1>
-    </div>
+    <BrowserRouter>
+      <Navbar/>
+      <div className="container">
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+      </Routes>
+      </div>
+      <Footer/>
+    </BrowserRouter>
   );
 }
 
