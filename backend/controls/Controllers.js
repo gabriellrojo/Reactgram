@@ -6,10 +6,6 @@ const createToken = require("../helpers/createToken")
 module.exports = class Controller {
     
     //Controller para os usuários
-    
-    static home = (req, res) => {
-        res.send("Hello Word")
-    }
 
     static registerUser = async (req, res) => {
         const name = req.body.name
