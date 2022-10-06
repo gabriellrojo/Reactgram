@@ -9,8 +9,7 @@
 }
 
 .form{
-    position: relative;
-    margin-top: 7px
+    position: relative
 }
 
 .form svg{
@@ -24,7 +23,7 @@
 
 .searchform{
     padding: 5px 0;
-    padding-left: 33px;
+    padding-left: 35px;
     top: 4px
     
 }
@@ -42,4 +41,9 @@
 svg,
 .entry{
     margin-right: 10px;
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 1.3em;
 }
