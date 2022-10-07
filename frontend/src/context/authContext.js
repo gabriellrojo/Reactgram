@@ -1,10 +1,10 @@
 import { createContext } from "react";
-import useRegister from "../hooks/useRegister";
+import useAuth from "../hooks/useRegister";
 
 export const Context = createContext()
 export const ContextProvider = ({children}) => {
-    const { token, userPost } = useRegister()
+    const { auth, logout } = useAuth()
     return (
-        <Context.Provider value={{ token, userPost }}>{children}</Context.Provider>
+        <Context.Provider value={{ auth, logout }}>{children}</Context.Provider>
     )
 }

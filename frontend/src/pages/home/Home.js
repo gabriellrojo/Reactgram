@@ -3,11 +3,11 @@ import { Context } from "../../context/authContext"
 import { useContext } from "react"
 
 const Home = () => {
-  const { token } = useContext(Context)
+  const { auth } = useContext(Context)
   return (
     <div>
-      {token ? ("to aqui") : ("nao to aqui")}
-      <p>{token}</p>
+      {auth ? ("to aqui") : ("nao to aqui")}
+      <p>{auth}</p>
     </div>
   )
 }

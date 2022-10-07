@@ -1,7 +1,7 @@
 import styles from "./Register.module.css"
-import { json, Link } from "react-router-dom"
-import { useEffect, useState } from "react"
-import useRegister from "../../hooks/useRegister"
+import { Link } from "react-router-dom"
+import { useState } from "react"
+import useAuth from "../../hooks/useRegister"
 import { useNavigate } from "react-router-dom"
 
 const Register = () => {
@@ -9,7 +9,7 @@ const Register = () => {
   const [email, setEmail] = useState()
   const [password, setPassword] = useState()
   const [confirmPassword, setConfirmPassword] = useState()
-  const { userPost } = useRegister()
+  const { userPost, error } = useAuth()
   
 
   const handleSubmit = (e) => {
@@ -24,6 +24,7 @@ const Register = () => {
     }
 
     userPost(user)
+    console.log(error)
 
   }
 
