@@ -6,7 +6,6 @@ import { Context } from "../context/authContext"
 
 const Navbar = () => {
   const { auth, logout } = useContext(Context)
-  console.log(auth)
   return (
     <div className={styles.navcontainer}>
         <div className={styles.frsblock}>

@@ -24,17 +24,15 @@ const Register = () => {
     }
 
     userPost(user)
-    console.log(error)
 
   }
-
- 
 
   return (
     <div class={styles.page}>
       <div className={styles.container}>
         <h2>ReactGram</h2>
         <p>Cadastre-se para ver as fotos do seu amigo</p>
+        {error && <p className="containererror">{error}</p>}
         <form onSubmit={handleSubmit}>
           <input type="text" placeholder="Digite o seu nome" value={name} onChange={(e) => setName(e.target.value)}/>
           <input type="email" placeholder="Digite o seu email" value={email} onChange={(e) => setEmail(e.target.value)}/>

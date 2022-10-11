@@ -68,7 +68,8 @@ input[type="submit"]{
 
 input:disabled{
     cursor: not-allowed;
-    background-color: #000;
+    border: 1px solid #AAA;
+    background-color: black;
 }
 
 button:hover,
@@ -82,4 +83,10 @@ input[type="submit"]:hover{
 
 .hide{
     display: none
+}
+
+.containererror{
+    border: 1px solid red;
+    padding: 10px 0;
+    background-color: rgb(224, 94, 94)
 }

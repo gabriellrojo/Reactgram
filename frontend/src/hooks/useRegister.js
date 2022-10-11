@@ -9,15 +9,36 @@ const useAuth = () => {
     const userPost = async (user) => {
         try
         {
-            await api.post("http://localhost:5000/user/register", user)
+            await api.post("http://localhost:5000/user/register", user, {
+                "Content-Type": "application/json"
+            })
             .then(res => localStorage.setItem("token", JSON.stringify(res.data.token)))
         }
         catch(err) {
-            const erro = err.response.data.erro[0]
+            const erro = err.response.data.erros[0]
             if(erro.length !== 0) {
                 setError(erro)
             }
             return
+        }
+        navigate("/")
+    }
+
+    //login
+
+    const login = async (user) => {
+        try{
+
+            await api.post("http://localhost:5000/user/login", user, {
+                "Content-Type": "application/json"
+            }).then(res => localStorage.setItem("token", JSON.stringify(res.data.token)))
+    
+        }catch(err){
+            const erro = err.response.data.erros[0]
+            if(erro.length !== 0){
+                setError(erro)
+            }
+            return  
         }
         navigate("/")
     }
@@ -27,8 +48,9 @@ const useAuth = () => {
         if(token){
             setAuth(true)
         }
-    }, [userPost])
+    }, [userPost, login])
     
+    //logout
 
     const logout = () => {
         localStorage.removeItem("token")
@@ -37,7 +59,7 @@ const useAuth = () => {
         
     }
     
-    return { auth, userPost, logout, error } 
+    return { auth, userPost, login, logout, error } 
 }
 
 export default useAuth

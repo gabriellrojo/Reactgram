@@ -6,8 +6,10 @@ import Login from "./pages/auth/Login";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { ContextProvider } from "./context/authContext";
+import EditProfile from "./pages/profile/EditProfile";
 
 function App() {
+  
   return (
     <BrowserRouter>
       <ContextProvider>
@@ -17,6 +19,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
+          <Route path="/profile/edit" element={<EditProfile/>}/>
         </Routes>
         </div>
         <Footer/>
