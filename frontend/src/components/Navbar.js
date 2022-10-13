@@ -6,6 +6,7 @@ import { Context } from "../context/authContext"
 
 const Navbar = () => {
   const { auth, logout } = useContext(Context)
+  const id = localStorage.id
   return (
     <div className={styles.navcontainer}>
         <div className={styles.frsblock}>
@@ -17,8 +18,8 @@ const Navbar = () => {
         </div>
         <nav className={styles.nav}>
             <NavLink to="/"><BsHouseDoorFill/></NavLink>
-            {auth&& <NavLink to="/"><BsFillCameraFill/></NavLink>}
-            {auth&& <NavLink to="/"><BsFillPersonFill/></NavLink>}
+            {auth&& <NavLink to={`/profile/${JSON.parse(id)}`}><BsFillCameraFill/></NavLink>}
+            {auth&& <NavLink to="/profile/edit"><BsFillPersonFill/></NavLink>}
             {!auth&& <NavLink to="/login"><p className={styles.entry}>Entrar</p></NavLink>}
             {!auth&& <NavLink to="/Register"><p>Cadastrar</p></NavLink>}
             {auth&& <NavLink to="/login" onClick={logout}><p>Sair</p></NavLink>}

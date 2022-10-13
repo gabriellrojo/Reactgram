@@ -88,5 +88,10 @@ input[type="submit"]:hover{
 .containererror{
     border: 1px solid red;
     padding: 10px 0;
-    background-color: rgb(224, 94, 94)
+    background-color: rgb(224, 94, 94);
+    text-align: center;
+}
+
+svg{
+    cursor: pointer
 }

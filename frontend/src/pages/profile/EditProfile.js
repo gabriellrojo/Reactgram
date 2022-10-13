@@ -3,6 +3,7 @@ import api from "../../utils/api"
 import styles from "./EditProfile.module.css"
 import { Navigate, useNavigate } from "react-router-dom"
 
+
 const EditProfile = () => {
     const token = localStorage.token
     const [userData, setUserData] = useState({})
@@ -12,6 +13,7 @@ const EditProfile = () => {
     const [image, setImage] = useState()
     const [bio, setBio] = useState()
     const [previewImage, setPreviewImage] = useState()
+    const [error, setError] = useState()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -24,6 +26,7 @@ const EditProfile = () => {
             setName(res.data.name)
             setImage(res.data.image)
             setBio(res.data.bio)
+            setEmail(res.data.email)
         })
         
     },[])
@@ -32,7 +35,6 @@ const EditProfile = () => {
         const newImage = e.target.files[0]
         setPreviewImage(newImage)
         setImage(newImage)
-        console.log(previewImage)
     }
 
     const handleSubmit = async (e) => {
@@ -69,7 +71,8 @@ const EditProfile = () => {
                 Authorization: `Bearer ${JSON.parse(token)}`,
                 "Content-Type": "multipart/form-data"
             }
-        })
+        }).then(res => console.log(res))
+          .catch(err => setError(err.response.data.erro[0]))
 
         navigate("/profile")
 
@@ -80,10 +83,10 @@ const EditProfile = () => {
         <div className={styles.logincontainer}>
             <h2>Edite os seus dados</h2>
             <p>Adicione uma imagem de perfil e conta mais sobre você...</p>
-            {previewImage && <img className={styles.image} src={URL.createObjectURL(previewImage)} />}
+            {(previewImage || image) && <img className={styles.image} src={previewImage ? (URL.createObjectURL(previewImage)) : (`http://localhost:5000/uploads/users/${image}`)} alt={name} />}
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder={name} value={name} onChange={e => setName(e.target.value)}/>
-                <input type="email" placeholder={email} disabled/>
+                <input type="email" placeholder={email} disabled value={email}/>
                 <input type="password" placeholder="Password" value={password} onChange={(e => e.target.value)}/>
                 <label>
                     <span className={styles.title}>Imagem do perfil:</span>
@@ -96,6 +99,7 @@ const EditProfile = () => {
                 <input type="submit" value="Atualizar"/>
             </form>
         </div>
+        {error&& <p className="containererror">{error}</p>}
     </div>
   )
 }
