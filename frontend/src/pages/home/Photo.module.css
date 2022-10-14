@@ -14,4 +14,28 @@
 
 .title{
     margin: 20px;
+    text-align: center;
+}
+
+.img{
+    width: 40vw;
+}
+
+.container3{
+    width: 40vw;
+}
+
+.createdBy{
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(214, 213, 213);
+}
+
+.containerLike{
+    width: 40vw;
+    margin-top: 20px;
+    display: flex
+}
+
+.author{
+    font-weight: bold;
 }
