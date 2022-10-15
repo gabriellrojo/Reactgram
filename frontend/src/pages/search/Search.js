@@ -5,6 +5,7 @@ import { BsHeart, BsHeartFill } from "react-icons/bs"
 import styles from "./Search.module.css"
 
 const Search = () => {
+  const id = localStorage.id
   const { search } = useLocation()
   const query = new URLSearchParams(search)
   const s = query.get("q")
@@ -56,7 +57,7 @@ const Search = () => {
                 <p className={styles.createdBy}>Publicado por: <span className={styles.author}>{photo.userName}</span></p>
               </div>
               <div className={styles.containerLike}>
-                <p>{photo.likes.length == 0 ? (< BsHeart />) : (< BsHeartFill onClick={() => handleClick(photo._id)}/>)}{photo.likes.length} like(s)</p>
+                <p>{photo.likes.includes(JSON.parse(id)) ? (< BsHeart />) : (< BsHeartFill onClick={() => handleClick(photo._id)}/>)}{photo.likes.length} like(s)</p>
               </div>
             </div>
             <div className={styles.containerComments}>

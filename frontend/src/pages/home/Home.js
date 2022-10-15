@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 
 const Home = () => {
   const [photos, setPhotos] = useState()
+  const id = localStorage.id
   const token = localStorage.token
 
   const handleClick = async (id) => {
@@ -32,7 +33,7 @@ const Home = () => {
           <div className={styles.container3}>
             <h3 className={styles.title}>{photo.title}</h3>
             <p className={styles.author}>Puplicada por <span className={styles.authorname}>{photo.userName}</span></p>
-            <p className={styles.likes}>{photo.likes.length == 0 ? (< BsHeart onClick={() => handleClick(photo._id)}/>) : (< BsHeartFill/>)} {photo.likes.length} likes(s)</p>
+            <p className={styles.likes}>{photo.likes.includes(JSON.parse(id)) ? (< BsHeartFill/>) : (< BsHeart onClick={() => handleClick(photo._id)}/>)} {photo.likes.length} likes(s)</p>
           </div>
           <Link className="btn" to={`/photo/${photo._id}`}>Ver Mais</Link>
       </div>

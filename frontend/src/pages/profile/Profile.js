@@ -93,7 +93,7 @@ const Profile = () => {
                 <form onSubmit={handleSubmit}>
                   <label>
                     <span>Título para a foto</span>
-                    <input type="text" placeholder="Insira uma foto" value={title} onChange={e => setTitle(e.target.value)}/>
+                    <input type="text" placeholder="Insira o título da postagem" value={title} onChange={e => setTitle(e.target.value)}/>
                   </label>
                   <label>
                     <span>Imagem:</span>

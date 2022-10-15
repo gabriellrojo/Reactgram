@@ -10,6 +10,7 @@ const Photo = () => {
     const token = localStorage.token
     const { id } = useParams()
     const [comment, setComment] = useState()
+    const idUser = localStorage.id
     
     const handleClick = async (id) => {
             await api.put(`http://localhost:5000/photo/likes/${id}`, null, {
@@ -58,7 +59,7 @@ const Photo = () => {
                 <p className={styles.createdBy}>Criado por: <span className={styles.author}>{photo.userName}</span></p>
             </div>
             <div className={styles.containerLike}>
-                {photo.likes.includes(photo.userId) ? (<BsHeartFill/>) : (<BsHeart onClick={() => handleClick(photo._id)}/>)}
+                {photo.likes.includes(JSON.parse(idUser)) ? (<BsHeartFill/>) : (<BsHeart onClick={() => handleClick(photo._id)}/>)}
                 <p>{photo.likes.length} like(s)</p>
             </div>
             <div className={styles.containerComments}>
