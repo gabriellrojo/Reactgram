@@ -1,0 +1,45 @@
+.page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 130vh;
+    margin: auto 0;
+}
+
+.container{
+    max-width: 33%;
+    background-color: black;
+    border: 1px solid rgb(214, 213, 213);
+    padding: 1.5em 2.5em;
+    text-align: center;
+    
+    
+}
+
+.container h2,
+.container p{
+    margin-bottom: 1em;
+}
+
+.container p{
+    font-size: 0.95em;
+}
+
+.lastp {
+    font-size: 0.8em;
+}
+
+.login{
+    text-decoration: underline;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.login:hover{
+    color: rgb(214, 213, 213)
+}
+
+input:last-child{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

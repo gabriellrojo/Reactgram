@@ -13,7 +13,7 @@ server.use(express.urlencoded({
 }))
 server.use(cors({
     credentials: true,
-    origin: "http//localhost:3000"
+    origin: "http://localhost:3000"
 }))
 server.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 

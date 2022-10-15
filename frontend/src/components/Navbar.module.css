@@ -1,0 +1,49 @@
+.navcontainer{
+    height: 10vh;
+    display: flex;
+    border-bottom: 1px solid rgb(173, 173, 173);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    background-color: black
+}
+
+.form{
+    position: relative
+}
+
+.form svg{
+    background-color: #3b3b3b;
+    position: absolute;
+    left: 7px;
+    top: 25px;
+    z-index: 1
+    
+}
+
+.searchform{
+    padding: 5px 0;
+    padding-left: 35px;
+    top: 4px
+    
+}
+
+.frsblock,
+.nav{
+    display: flex;
+    align-items: center;
+}
+
+.form{
+    margin-left: 20px;
+}
+
+svg,
+.entry{
+    margin-right: 10px;
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 1.3em;
+}
