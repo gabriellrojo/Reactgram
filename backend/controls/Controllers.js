@@ -70,7 +70,7 @@ module.exports = class Controller {
 
     static profile = (req, res) => {
         const user = req.user
-        res.send(user)
+        res.status(200).json(user)
     }
 
     static updateProfile = async (req, res) => {
@@ -179,14 +179,10 @@ module.exports = class Controller {
 
     static getUserPhotos = async (req, res) => {
         const id = req.params.id
-
-        try {
-            const userPhotos = await Photo.find({userId: id})
-            res.status(200).json(userPhotos).sort([["createdAt, -1"]]).exec()
-        }
-        catch {
-            res.status(404).json({erros: ["Ocorreu um erro. Tente novamente"]})
-        }      
+        const userPhotos = await Photo.find({userId: id})
+        res.status(200).json(userPhotos)
+        //res.status(200).json(userPhotos).sort([["createdAt, -1"]]).exec()
+        
     }
 
     static getPhotoById = async (req, res) => {
@@ -195,6 +191,7 @@ module.exports = class Controller {
         const getPhoto = await Photo.findById({_id: id})
         if(!getPhoto){
             res.status(404).json({erros: ["Fotos não encontrada"]})
+            return
         }
         
         res.status(201).json(getPhoto)
