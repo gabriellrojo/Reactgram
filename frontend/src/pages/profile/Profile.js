@@ -111,7 +111,7 @@ const Profile = () => {
           <div className={styles.photocontainer2}>
           {photos &&
           photos.map(photo =>
-            <div>
+            <div className={styles.container3}>
               <img className={styles.imgsprofile} src={`http://localhost:5000/uploads/photos/${photo.image}`} alt={photo.title}/>
               {data && 
                 id == data._id ? (<div className={styles.icons}>

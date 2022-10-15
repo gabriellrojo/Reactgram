@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 30px 0;
+    width: 40vw;
+}
+
+.container3{
+    display: flex;
+    flex-direction: column;
+    height: 15vh;
+    justify-content: space-around;
+    align-items: space-between;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 40vw;
+}
+
+.img{
+    max-width: 40vw;
+}

@@ -8,6 +8,11 @@
     list-style: none;
 }
 
+html,
+body{
+    background-color: #1d1d1d;
+}
+
 a{
     color: #fafafa;
     

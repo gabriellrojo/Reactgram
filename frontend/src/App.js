@@ -9,7 +9,8 @@ import { ContextProvider } from "./context/authContext";
 import EditProfile from "./pages/profile/EditProfile";
 import Profile from "./pages/profile/Profile";
 import EditPhoto from "./pages/photo/EditPhoto";
-import Photo from "./pages/home/Photo";
+import Photo from "./pages/photo/Photo";
+import Search from "./pages/search/Search";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/register" element={<Register/>}/>
           <Route path="/profile/edit" element={<EditProfile/>}/>
+          <Route path="/search" element={<Search/>}/>
           <Route path="/profile/:id" element={<Profile/>}/>
           <Route path="/photo/:id" element={<Photo/>}/>
           <Route path="/photo/edit/:id" element={<EditPhoto/>}/>
